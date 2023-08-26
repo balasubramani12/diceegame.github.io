@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dicee Game</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="main">
+    <h1>Dicee Game</h1>
+    <h2 id="result">Play at your own risk.</h2>
+    <form   id="form1"> <input type="text" id="player1" placeholder="Enter player1 name">
+          <input type="text" id="player2" placeholder="Enter player2 name"><br>
+          <input type="button" id="sbt" value="Submit" onclick="getData()">
+    </form>
+    <div class="players">
+        <div><h3 id="play1">Player 1</h3></div>
+        <div><h3 id="play2">Player 2</h3></div>
+        <div><img src="one.png" id="dice1" alt="Dice 1" height="100px" width="100px"></div>
+        <div><img src="one.png" id="dice2" alt="Dice 2" height="100px" width="100px"></div>
+        <div class="click"> <button id="click-btn" onclick="getResult()" >play game</button></div>
+    </div>
+
+    <div id="score">
+
+    </div>
+
+    
+
+    <script>
+        var  playNum1,playNum2;
+        var name1,name2;
+        var score1 = 0;
+        var score2 = 0;
+
+        function getData(){
+            name1 = document.getElementById('player1').value;
+            name2 = document.getElementById('player2').value;
+            document.querySelector('#play1').innerHTML = `${name1}`;
+            document.querySelector('#play2').innerHTML = `${name2}`;
+            console.log(name1);
+            console.log(name2);
+
+        }
+        function getResult(){
+            playNum1 = Math.ceil(Math.random() * 6);
+            playNum2 = Math.ceil(Math.random() * 6);
+
+            var img1 = document.querySelector("#dice1");
+            var img2 = document.querySelector("#dice2");
+            var result = document.querySelector("#result");
+
+            if(playNum1 == 1){
+                img1.setAttribute('src','one.png');
+            }else if(playNum1 == 2){
+                img1.setAttribute('src','two.png');
+            }
+            else if(playNum1 == 3){
+                img1.setAttribute('src','three.png');
+            }
+            else if(playNum1 == 4){
+                img1.setAttribute('src','four.png');
+            }
+            else if(playNum1 == 5){
+                img1.setAttribute('src','five.png');
+            }
+            else if(playNum1 == 6){
+                img1.setAttribute('src','six.png');
+            }
+
+            // image 2
+
+            if(playNum2 == 1){
+                img2.setAttribute('src','one.png');
+            }else if(playNum2 == 2){
+                img2.setAttribute('src','two.png');
+            }
+            else if(playNum2 == 3){
+                img2.setAttribute('src','three.png');
+            }
+            else if(playNum2 == 4){
+                img2.setAttribute('src','four.png');
+            }
+            else if(playNum2 == 5){
+                img2.setAttribute('src','five.png');
+            }
+            else if(playNum2 == 6){
+                img2.setAttribute('src','six.png');
+            }
+
+
+            if(playNum1 == playNum2){
+                result.classList.add('tied');
+                result.classList.remove('player1');
+                result.innerHTML = "!!! Game got Tied !!!";
+                
+            }else if(playNum1 > playNum2){
+                result.classList.remove('tied');
+                result.classList.add('player1');
+                score1++;
+                if(name1 == null || name1 == ""){
+                    result.innerHTML = `Player-1 Won 🚩🚩🚩`;
+                    
+                }else{
+                    result.innerHTML = `${name1} Won 🚩🚩🚩`;
+                }
+                
+                
+            }
+            else if(playNum1 < playNum2){
+                score2++;
+                result.classList.remove('tied');
+                result.classList.remove('player1');
+                if(name2 == null || name2 ==""){
+                    result.innerHTML = `Player-2 Won 🚩🚩🚩`;   
+                }else{
+                    result.innerHTML = `${name2} Won 🚩🚩🚩`;
+                }
+            }
+            document.querySelector('#score').innerHTML = `Score <br> Player-1:&nbsp;&nbsp;&nbsp;${score1}<br>Player-2:&nbsp;&nbsp;&nbsp;${score2}<br>`;
+            console.log(playNum1);
+            console.log(playNum2);
+            
+        }
+    </script>
+    </div>
+</body>
+</html>
